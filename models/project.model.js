@@ -67,3 +67,16 @@ const Project = sequelize.define('Project', {
 });
 
 module.exports = Project;
+
+// Tambahkan relasi dengan User
+Project.associate = (models) => {
+  Project.belongsTo(models.User, {
+    foreignKey: 'admin_id',
+    as: 'adminUser'
+  });
+  
+  Project.belongsTo(models.User, {
+    foreignKey: 'technician_id',
+    as: 'technicianUser'
+  });
+};

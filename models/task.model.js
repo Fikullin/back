@@ -7,32 +7,64 @@ const Task = sequelize.define('Task', {
     primaryKey: true,
     autoIncrement: true
   },
-  title: {
-    type: DataTypes.STRING,
+  project_id: {
+    type: DataTypes.INTEGER,
     allowNull: false
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true
+  action: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'title'
   },
   due_date: {
     type: DataTypes.DATE,
     allowNull: true
   },
-  status: {
-    type: DataTypes.STRING,
+  attachment: {
+    type: DataTypes.TEXT,
     allowNull: true,
-    defaultValue: 'pending'
+    get() {
+      const rawValue = this.getDataValue('attachment');
+      return rawValue ? rawValue.split(',') : [];
+    },
+    set(val) {
+      this.setDataValue('attachment', Array.isArray(val) ? val.join(',') : val);
+    }
   },
-  email_sent: {
+  status_description: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  scope: {
+    type: DataTypes.ENUM('project', 'task', 'invoice'),
+    defaultValue: 'project'
+  },
+  assigned_to: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    validate: {
+      isInt: true,
+      // Tambahkan custom validator untuk mengizinkan null
+      customValidator(value) {
+        if (value === '') {
+          // Jika string kosong, ubah menjadi null
+          this.setDataValue('assigned_to', null);
+        }
+      }
+    }
+  },
+  status: {
+    type: DataTypes.ENUM('not_started', 'in_progress', 'completed', 'blocked'),
+    defaultValue: 'not_started'
+  },
+  completed: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
   }
 }, {
   tableName: 'tasks',
   timestamps: true,
-  createdAt: 'created_at',
-  updatedAt: 'updated_at'
+  underscored: true
 });
 
 module.exports = Task;

@@ -64,6 +64,14 @@ Project.belongsTo(User, { foreignKey: 'admin_id', as: 'adminUser' });
 User.hasMany(Project, { foreignKey: 'technician_id', as: 'technicianProjects' });
 Project.belongsTo(User, { foreignKey: 'technician_id', as: 'technicianUser' });
 
+// Tambahkan asosiasi untuk Task dan User
+Task.belongsTo(User, { foreignKey: 'assigned_to', as: 'assignedUser' });
+User.hasMany(Task, { foreignKey: 'assigned_to', as: 'assignedTasks' });
+
+// Tambahkan asosiasi untuk Task dan Project
+Task.belongsTo(Project, { foreignKey: 'project_id' });
+Project.hasMany(Task, { foreignKey: 'project_id' });
+
 // Make sure to export the Project model
 module.exports = {
   User,

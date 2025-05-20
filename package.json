@@ -13,7 +13,8 @@
     "seed": "sequelize db:seed:all",
     "seed:undo:all": "sequelize db:seed:undo:all",
     "create-admin": "node scripts/create-admin.js",
-    "reset-admin-password": "node scripts/reset-admin-password.js"
+    "reset-admin-password": "node scripts/reset-admin-password.js",
+    "reset-db": "node scripts/reset-database.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
