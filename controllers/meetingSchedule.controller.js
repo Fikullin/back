@@ -4,7 +4,7 @@ const { sendEmail } = require('../utils/emailService');
 
 exports.createMeetingSchedule = async (req, res) => {
   try {
-    const { title, description, meeting_date, project_id, memberIds, platform, endDate } = req.body;
+    const { title, description, meeting_date, project_id, memberIds, platform, endDate, url } = req.body;
 
     // Create meeting schedule
     const meeting = await MeetingSchedule.create({
@@ -13,7 +13,8 @@ exports.createMeetingSchedule = async (req, res) => {
       meeting_date,
       project_id,
       platform,
-      endDate
+      endDate,
+      url
     });
 
 
@@ -80,7 +81,7 @@ exports.deleteMeetingSchedule = async (req, res) => {
 exports.updateMeetingSchedule = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, meeting_date, project_id, memberIds, platform, endDate } = req.body;
+    const { title, description, meeting_date, project_id, memberIds, platform, endDate, url } = req.body;
 
     const meeting = await MeetingSchedule.findByPk(id);
     if (!meeting) {
@@ -93,7 +94,8 @@ exports.updateMeetingSchedule = async (req, res) => {
       meeting_date,
       project_id,
       platform,
-      endDate
+      endDate,
+      url
     });
 
     // Update members if provided

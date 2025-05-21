@@ -32,6 +32,11 @@ const MeetingSchedule = sequelize.define('MeetingSchedule', {
     allowNull: true,
     defaultValue: ''
   },
+  url: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: ''
+  },
   endDate: {
     type: DataTypes.DATE,
     allowNull: true,
