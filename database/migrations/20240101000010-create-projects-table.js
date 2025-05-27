@@ -57,10 +57,6 @@ module.exports = {
         type: Sequelize.ENUM('Proposal', 'Ongoing', 'Completed', 'On Hold'),
         defaultValue: 'Proposal'
       },
-      progress: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
       start_date: {
         type: Sequelize.DATE,
         allowNull: true

@@ -25,7 +25,6 @@ exports.getAllProjects = async (req, res) => {
       name: project.name,
       admin: project.adminUser ? project.adminUser.name : 'Not Assigned',
       technician: project.technicianUser ? project.technicianUser.name : 'Not Assigned',
-      progress: project.progress || 0,
       state: project.state,
       start_date: project.start_date ? new Date(project.start_date).toISOString().split('T')[0] : '',
       end_date: project.end_date ? new Date(project.end_date).toISOString().split('T')[0] : ''
@@ -96,7 +95,6 @@ exports.createProject = async (req, res) => {
       state,
       start_date,
       end_date,
-      progress: 0 // Default progress
     });
 
     res.status(201).json({
@@ -124,8 +122,7 @@ exports.updateProject = async (req, res) => {
       technician_id,
       state,
       start_date,
-      end_date,
-      progress
+      end_date
     } = req.body;
 
     const project = await Project.findByPk(id);
@@ -146,8 +143,7 @@ exports.updateProject = async (req, res) => {
       technician_id,
       state,
       start_date,
-      end_date,
-      progress
+      end_date
     });
 
     res.status(200).json({

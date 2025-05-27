@@ -43,14 +43,6 @@ const Project = sequelize.define('Project', {
     type: DataTypes.ENUM('Proposal', 'Ongoing', 'Completed', 'On Hold'),
     defaultValue: 'Proposal'
   },
-  progress: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-    validate: {
-      min: 0,
-      max: 100
-    }
-  },
   start_date: {
     type: DataTypes.DATE,
     allowNull: true
