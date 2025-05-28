@@ -36,7 +36,7 @@ const Task = sequelize.define('Task', {
     allowNull: true
   },
   scope: {
-    type: DataTypes.ENUM('project', 'task', 'invoice'),
+    type: DataTypes.ENUM('project', 'task', 'invoice', 'activity', 'member'),
     defaultValue: 'project'
   },
   assigned_to: {
